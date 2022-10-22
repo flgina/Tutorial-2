@@ -55,6 +55,7 @@ public class PlayerScript : MonoBehaviour
         {
             lives -= 1;
             SetScoreText();
+            Destroy(collision.collider.gameObject);
         }
 
     }
