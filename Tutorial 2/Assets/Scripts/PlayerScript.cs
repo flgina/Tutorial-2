@@ -55,6 +55,7 @@ public class PlayerScript : MonoBehaviour
         if (lives == 0)
         {
             loseTextObject.SetActive(true);
+            Destroy(gameObject);
         }
 
     }
