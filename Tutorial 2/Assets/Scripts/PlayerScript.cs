@@ -9,9 +9,6 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D rd2d;
 
     public float speed;
-    public AudioClip musicClipOne;
-    public AudioClip musicClipTwo;
-    public AudioSource musicSource;
     public int score;
     public int lives;
 
@@ -34,6 +31,32 @@ public class PlayerScript : MonoBehaviour
 
         SetScoreText();
         loseTextObject.SetActive(false);
+    }
+
+    void SetScoreText()
+    {
+        scoreText.text = "Score: " + score.ToString();
+        if (score == 8)
+        {
+            winTextObject.SetActive(true);
+            Destroy(gameObject);
+
+            SoundManagerScript.PlaySound("victory");
+        }
+
+        scoreText.text = "Score: " + score.ToString();
+        if (score == 4)
+        {
+            lives = 3;
+            transform.position = new Vector2(26.54f, 0.0f);
+        }
+
+        livesText.text = "Lives: " + lives.ToString();
+        if (lives == 0)
+        {
+            loseTextObject.SetActive(true);
+        }
+
     }
 
     // Update is called once per frame
@@ -71,30 +94,5 @@ public class PlayerScript : MonoBehaviour
                 rd2d.AddForce(new Vector2(0, 3), ForceMode2D.Impulse); //the 3 in this line of code is the player's "jumpforce," and you change that number to get different jump behaviors.  You can also create a public variable for it and then edit it in the inspector.
             }
         }
-    }
-
-    private void SetScoreText()
-    {
-        scoreText.text = "Score: " + score.ToString();
-        if (score == 8)
-        {
-            winTextObject.SetActive(true);
-            musicSource.clip = musicClipTwo;
-            musicSource.Play();
-        }
-
-        scoreText.text = "Score: " + score.ToString();
-        if (score == 4)
-        {
-            lives = 3;
-            transform.position = new Vector2(26.54f, 0.0f);
-        }
-
-        livesText.text = "Lives: " + lives.ToString();
-        if (lives == 0)
-        {
-            loseTextObject.SetActive(true);
-        }
-
     }
 }
