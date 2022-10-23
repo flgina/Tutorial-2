@@ -9,7 +9,9 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D rd2d;
 
     public float speed;
-
+    public AudioClip musicClipOne;
+    public AudioClip musicClipTwo;
+    public AudioSource musicSource;
     public int score;
     public int lives;
 
@@ -74,9 +76,18 @@ public class PlayerScript : MonoBehaviour
     private void SetScoreText()
     {
         scoreText.text = "Score: " + score.ToString();
-        if (score == 4)
+        if (score == 8)
         {
             winTextObject.SetActive(true);
+            musicSource.clip = musicClipTwo;
+            musicSource.Play();
+        }
+
+        scoreText.text = "Score: " + score.ToString();
+        if (score == 4)
+        {
+            lives = 3;
+            transform.position = new Vector2(26.54f, 0.0f);
         }
 
         livesText.text = "Lives: " + lives.ToString();
@@ -84,5 +95,6 @@ public class PlayerScript : MonoBehaviour
         {
             loseTextObject.SetActive(true);
         }
+
     }
 }
